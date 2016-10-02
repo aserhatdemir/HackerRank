@@ -1,42 +1,38 @@
-def print_second_grade(lst):
-    sec_flag = False
-    max_flag = False
+def main():
+    num = int(input())
+    # students = [[input() for j in range(2)] for n in range(num)]
+    students = [[input() if (j == 0) else float(input()) for j in range(2)] for n in range(num)]
+    # [float(x[1]) for x in students]
 
+    print_second_lowest_grade(students)
+
+
+def get_second_lowest_grade(lst):
+    min1 = lst[0][1]
+    min2 = lst[1][1]
+    if min2 < min1:
+        min1, min2 = min2, min1
+    for i in lst[2:]:
+        if i[1] < min1:
+            min1, min2 = i[1], min1
+        elif i[1] < min2 and i[1] != min1 or min1 == min2:
+            min2 = i[1]
+    return min2
+
+
+def print_second_lowest_grade(lst):
+    my_num = get_second_lowest_grade(lst)
+    my_list = []
     for i in lst:
-        if not max_flag:
-            n_max = i[1]
-            max_flag = True
-        elif not sec_flag:
-            if i[1] > n_max:
-                n_sec = n_max
-                n_max = i[1]
-                sec_flag = True
-            elif i[1] is n_max:
-                pass
-            else:
-                n_sec = i[1]
-                sec_flag = True
-                print(i[0])
-        elif i[1] > n_max:
-            n_sec = n_max
-            n_max = i[1]
-        elif i[1] is n_max:
-            pass
-        elif i[1] > n_sec:
-            n_sec = i[1]
-            print(i[0])
-        else:
-            pass
+        if i[1] == my_num:
+            my_list.append(i[0])
+
+    my_list.sort()
+    for n in my_list:
+        print(n)
 
 
-
-num = int(input())
-#students = [[input() for j in range(2)] for n in range(num)]
-students = [[input() if (j == 0) else float(input()) for j in range(2)] for n in range(num)]
-#[float(x[1]) for x in students]
-
-print_second_grade(students)
-
-print(students)
+if __name__ == "__main__":
+    main()
 
 
